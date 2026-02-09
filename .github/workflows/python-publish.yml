@@ -26,7 +26,7 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Build release distributions
+      - name: Run addition program
         run: num1 = 10
              num2 = 20
 
