@@ -5,31 +5,26 @@
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.
-name: Upload Python Package
+name: Run addition program
 
 on:
   workflow_dispatch:
-  release:
-    types: [published]
-
-permissions:
-  contents: read
 
 jobs:
-  release-build:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
       - name: Run addition program
-        run: |
-          python addition.py
-
+        run: python addition.py
 
 
          
