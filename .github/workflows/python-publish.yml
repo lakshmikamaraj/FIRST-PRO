@@ -5,26 +5,33 @@
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.
-name: Run addition program
+name: Upload Python Package
 
 on:
   workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
 
 jobs:
-  build:
+  release-build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
       - name: Run addition program
-        run: python addition.py
+       env:
+          NUM1: ${{ github.event.inputs.num1 }}
+          NUM2: ${{ github.event.inputs.num2 }}
+        run: |
+          python addition.py
 
 
          
