@@ -9,11 +9,13 @@ name: Upload Python Package
 
 on:
   workflow_dispatch:
-  release:
-    types: [published]
-
-permissions:
-  contents: read
+    inputs:
+      num1:
+        description: "Enter first number"
+        required: true
+      num2:
+        description: "Enter second number"
+        required: true
 
 jobs:
   release-build:
@@ -27,11 +29,12 @@ jobs:
           python-version: "3.x"
 
       - name: Run addition program
-       env:
+        env:
           NUM1: ${{ github.event.inputs.num1 }}
           NUM2: ${{ github.event.inputs.num2 }}
         run: |
           python addition.py
+
 
 
          
