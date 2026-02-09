@@ -27,5 +27,5 @@ jobs:
           python-version: "3.x"
 
       - name: Build release distributions
-        run: python hello.py|
+        run: python hello.py
          
