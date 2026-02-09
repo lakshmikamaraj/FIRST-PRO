@@ -5,17 +5,22 @@
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.
+# This workflow will upload a Python Package to PyPI when a release is created
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#publishing-to-package-registries
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
 name: Upload Python Package
 
 on:
   workflow_dispatch:
-    inputs:
-      num1:
-        description: "Enter first number"
-        required: true
-      num2:
-        description: "Enter second number"
-        required: true
+  release:
+    types: [published]
+
+permissions:
+  contents: read
 
 jobs:
   release-build:
@@ -27,13 +32,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+       name: Run Python script
+       run: python script.py
+        num1 = 10
+        num2 = 20
+        print("The sum is:", num1 + num2)
 
-      - name: Run addition program
-        env:
-          NUM1: ${{ github.event.inputs.num1 }}
-          NUM2: ${{ github.event.inputs.num2 }}
-        run: |
-          python addition.py
 
 
 
