@@ -12,31 +12,36 @@
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.
-name: Upload Python Package
+name: Python Addition Manual Workflow
 
 on:
   workflow_dispatch:
-  release:
-    types: [published]
-
-permissions:
-  contents: read
+    inputs:
+      number1:
+        description: "First number"
+        required: true
+        default: "5"
+      number2:
+        description: "Second number"
+        required: true
+        default: "3"
 
 jobs:
-  release-build:
+  run-addition:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.x"
-       name: Run Python script
-       run: python script.py
-        num1 = 10
-        num2 = 20
-        print("The sum is:", num1 + num2)
+          python-version: '3.10'
+
+      - name: Run addition script
+        run: |
+          python add.py ${{ github.event.inputs.number1 }} ${{ github.event.inputs.number2 }}
 
 
 
